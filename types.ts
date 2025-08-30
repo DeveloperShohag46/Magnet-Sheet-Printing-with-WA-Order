@@ -8,7 +8,6 @@ export interface ProductOptions {
   quantity: number; // The final numeric quantity
   quantitySelection: string; // The dropdown selection (e.g., '50' or 'Custom')
   printing: string;
-  lamination: string;
   material: string;
   shape: string;
   shipping: 'pickup' | 'ride';
@@ -54,7 +53,6 @@ export interface AppConfigType {
     size: string[];
     quantity: (string | number)[];
     printing: string[];
-    lamination: string[];
     material: string[];
     shape: string[];
   };
@@ -63,7 +61,6 @@ export interface AppConfigType {
     shippingCost: number;
     multipliers: {
       printing: { [key: string]: number };
-      lamination: { [key: string]: number };
       shape: { [key: string]: number };
     };
     volumeDiscount: {

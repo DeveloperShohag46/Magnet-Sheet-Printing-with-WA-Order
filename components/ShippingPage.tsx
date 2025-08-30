@@ -131,7 +131,6 @@ export const ShippingPage: React.FC<ShippingPageProps> = ({ config, cartItem, on
       `*- Size:* ${options.size === 'Custom Size' ? `${options.customWidth}x${options.customHeight} ${options.unit}` : options.size}`,
       `*- Quantity:* ${options.quantity} A3 Sheets`,
       `*- Printing:* ${options.printing}`,
-      `*- Lamination:* ${options.lamination}`,
       `*- Material:* ${options.material}`,
       `*- Shape:* ${options.shape}`,
       `*- Shipping:* ${options.shipping === 'ride' ? 'Ride Hailing' : 'Self Pickup'}`,
@@ -202,7 +201,6 @@ export const ShippingPage: React.FC<ShippingPageProps> = ({ config, cartItem, on
                         <DetailRow label="Artwork Size" value={options.size === 'Custom Size' ? `${options.customWidth}x${options.customHeight} ${options.unit}` : options.size} />
                         <DetailRow label="Quantity" value={`${options.quantity} A3 Sheets`} />
                         <DetailRow label="Printing" value={options.printing} />
-                        <DetailRow label="Lamination" value={options.lamination} />
                         <DetailRow label="Shape" value={options.shape} />
                     </div>
                     <div className="py-3 space-y-1">

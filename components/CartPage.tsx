@@ -65,7 +65,6 @@ export const CartPage: React.FC<CartPageProps> = ({ cartItem, onBackToProduct, o
                     <DetailRow label="Artwork Size" value={options.size === 'Custom Size' ? `${options.customWidth}x${options.customHeight} ${options.unit}` : options.size} />
                     <DetailRow label="Quantity (A3 Sheets)" value={options.quantity} />
                     <DetailRow label="Printing" value={options.printing} />
-                    <DetailRow label="Lamination" value={options.lamination} />
                     <DetailRow label="Material" value={options.material} />
                     <DetailRow label="Shape" value={options.shape} />
                     <DetailRow label="Shipping" value={options.shipping === 'ride' ? 'Ride Hailing' : options.shipping.charAt(0).toUpperCase() + options.shipping.slice(1)} />

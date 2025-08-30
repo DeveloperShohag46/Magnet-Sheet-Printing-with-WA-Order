@@ -9,7 +9,6 @@ interface PrintingOptionsProps {
     size: string[];
     quantity: (string | number)[];
     printing: string[];
-    lamination: string[];
     material: string[];
     shape: string[];
   }
@@ -18,14 +17,13 @@ interface PrintingOptionsProps {
 export const PrintingOptions: React.FC<PrintingOptionsProps> = ({ options, onOptionChange, optionLists }) => {
 
   useEffect(() => {
-    // Automatically set shape for round sizes
-    if (options.size.toLowerCase().includes('round')) {
+    // Automatically set shape based on the selected size.
+    if (options.size.includes('Round')) {
       if (options.shape !== 'Circle/Oval') {
         onOptionChange('shape', 'Circle/Oval');
       }
     } else if (options.size === 'Custom Size') {
-      // Default custom size to square
-      if (options.shape === 'Circle/Oval') {
+      if (options.shape !== 'Square/Rectangle') {
         onOptionChange('shape', 'Square/Rectangle');
       }
     }
@@ -146,12 +144,6 @@ export const PrintingOptions: React.FC<PrintingOptionsProps> = ({ options, onOpt
           </SelectInput>
         </OptionWrapper>
         
-        <OptionWrapper title="Lamination">
-          <SelectInput value={options.lamination} onChange={(e) => onOptionChange('lamination', e.target.value)}>
-            {optionLists.lamination.map(l => <option key={l} value={l}>{l}</option>)}
-          </SelectInput>
-        </OptionWrapper>
-
         <OptionWrapper title="Material">
           <SelectInput 
             value={options.material} 
@@ -167,12 +159,14 @@ export const PrintingOptions: React.FC<PrintingOptionsProps> = ({ options, onOpt
           <SelectInput 
             value={options.shape} 
             onChange={(e) => onOptionChange('shape', e.target.value)}
-            disabled={options.size.toLowerCase().includes('round')}
+            disabled={options.size.includes('Round') || options.size === 'Custom Size'}
           >
             {optionLists.shape.map(s => <option key={s} value={s}>{s}</option>)}
           </SelectInput>
-           {options.size.toLowerCase().includes('round') && 
+           {options.size.includes('Round') && 
             <p className="text-xs text-gray-500 mt-1">Shape is automatically set to Circle/Oval for round sizes.</p>}
+           {options.size === 'Custom Size' && 
+            <p className="text-xs text-gray-500 mt-1">Shape is automatically set to Square/Rectangle for custom sizes.</p>}
         </OptionWrapper>
         
         <OptionWrapper title="Shipping Method">

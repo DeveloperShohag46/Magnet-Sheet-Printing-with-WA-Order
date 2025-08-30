@@ -16,7 +16,6 @@ const getDefaultOptions = (config: AppConfigType): ProductOptions => ({
   quantity: typeof config.options.quantity[0] === 'number' ? config.options.quantity[0] : 1,
   quantitySelection: String(config.options.quantity[0]),
   printing: config.options.printing[0],
-  lamination: config.options.lamination[0],
   material: config.options.material[0],
   shape: config.options.shape[1], // Default to Circle/Oval, seems intentional
   shipping: 'pickup',

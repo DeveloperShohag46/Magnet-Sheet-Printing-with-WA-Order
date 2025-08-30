@@ -10,20 +10,24 @@ export const usePriceCalculation = (options: ProductOptions, pricingConfig: AppC
   } = pricingConfig;
 
   const printingMultipliers: { [key: string]: number } = multipliers.printing;
-  const laminationMultipliers: { [key: string]: number } = multipliers.lamination;
   const shapeMultipliers: { [key: string]: number } = multipliers.shape;
 
   return useMemo(() => {
     const optionCosts: { label: string; cost: number }[] = [];
     
-    const base = options.size === 'Custom Size' ? 25 : BASE_PRICE;
+    // The price is per A3 sheet, so the base price is always the same.
+    const base = BASE_PRICE;
 
     let totalMultiplier = 1;
     totalMultiplier *= printingMultipliers[options.printing] || 1;
-    totalMultiplier *= shapeMultipliers[options.shape] || 1;
+    
+    // Only apply the shape multiplier if the size is NOT "Custom Size".
+    // This prevents the price from changing when the shape is auto-selected for custom dimensions.
+    if (options.size.trim() !== 'Custom Size') {
+      totalMultiplier *= shapeMultipliers[options.shape] || 1;
+    }
     
     let pricePerSheet = base * totalMultiplier;
-    pricePerSheet += base * (laminationMultipliers[options.lamination] || 0);
 
     let subtotal = pricePerSheet * options.quantity;
 
